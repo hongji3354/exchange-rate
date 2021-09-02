@@ -4,6 +4,7 @@ import dev.jihun.domain.exchangerate.application.ExchangeRateApplication;
 import dev.jihun.domain.exchangerate.dto.ExchangeRateInformationResponse;
 import dev.jihun.domain.exchangerate.dto.ReceivedAmountCalculationRequest;
 import dev.jihun.domain.exchangerate.dto.ReceivedAmountCalculationResponse;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,7 @@ public class ExchangeRateApi {
     }
 
     @PostMapping("/receive-amount/calculation")
-    public ResponseEntity<ReceivedAmountCalculationResponse> receivedAmountCalculation(@RequestBody ReceivedAmountCalculationRequest request) {
+    public ResponseEntity<ReceivedAmountCalculationResponse> receivedAmountCalculation(@RequestBody @Valid ReceivedAmountCalculationRequest request) {
         return ResponseEntity.ok(exchangeRateApplication.receivedAmountCalculation(request));
     }
 
