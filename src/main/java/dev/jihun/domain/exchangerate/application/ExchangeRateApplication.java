@@ -20,7 +20,7 @@ public class ExchangeRateApplication {
     }
 
     public ReceivedAmountCalculationResponse receivedAmountCalculation(ReceivedAmountCalculationRequest request) {
-        ExchangeRate exchangeRate = new ExchangeRate();
+        ExchangeRate exchangeRate = this.exchangeRateApi.exchangeRateInquiry();
         String receiveAmount = exchangeRate.receiveAmountCalculation(request.getRemittanceAmount(), request.getReceiveCountry());
         return new ReceivedAmountCalculationResponse(receiveAmount);
     }
