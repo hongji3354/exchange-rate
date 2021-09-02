@@ -11,7 +11,8 @@ public enum ErrorCode {
     // Common
     INVALID_INPUT_VALUE(400, "C001", "Invalid Input Value"),
     NOT_ALLOWED_METHOD(405, "C002", "Not Allow Method"),
-    INTERNAL_SERVER_ERROR(500, "C003", "Server Error");
+    INTERNAL_SERVER_ERROR(500, "C003", "Server Error"),
+    INVALID_REMITTANCE_AMOUNT(400, "C004", "송금액이 바르지 않습니다.");
 
     private final int status;
     private final String code;
