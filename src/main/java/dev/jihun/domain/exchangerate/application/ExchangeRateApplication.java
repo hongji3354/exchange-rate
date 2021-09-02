@@ -5,6 +5,7 @@ import dev.jihun.domain.exchangerate.dto.ExchangeRateInformationResponse;
 import dev.jihun.domain.exchangerate.dto.ReceivedAmountCalculationRequest;
 import dev.jihun.domain.exchangerate.dto.ReceivedAmountCalculationResponse;
 import dev.jihun.domain.exchangerate.mapper.ExchangeRateMapper;
+import dev.jihun.infra.exchangerate.ExchangeRateApi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +13,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ExchangeRateApplication {
 
-    private final dev.jihun.infra.exchangerate.ExchangeRate exchangeRate;
+    private final ExchangeRateApi exchangeRateApi;
 
     public ExchangeRateInformationResponse getExchangeRateInformation() {
-        return ExchangeRateMapper.exchangeRateToExchangeRateInformationResponse(this.exchangeRate.exchangeRateInquiry());
+        return ExchangeRateMapper.exchangeRateToExchangeRateInformationResponse(this.exchangeRateApi.exchangeRateInquiry());
     }
 
     public ReceivedAmountCalculationResponse receivedAmountCalculation(ReceivedAmountCalculationRequest request) {

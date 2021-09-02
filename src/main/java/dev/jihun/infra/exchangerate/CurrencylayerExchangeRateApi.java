@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RequiredArgsConstructor
 @Component
-public class CurrencylayerExchangeRate implements ExchangeRate {
+public class CurrencylayerExchangeRateApi implements ExchangeRateApi {
 
     private final RestTemplate restTemplate;
     private static final String ACCESS_KEY = "74ff11c1d5b60497fcf44ee5f196a6a3";
