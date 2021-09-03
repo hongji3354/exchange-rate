@@ -23,13 +23,13 @@ public class ExchangeRate {
         this.php = php;
     }
 
-    public double receiveAmountCalculation(double remittanceAmount, String recipientCountry) {
+    public double receiveAmountCalculation(int remittanceAmount, String recipientCountry) {
         remittanceAmountValidation(remittanceAmount);
         RecipientCountry country = RecipientCountry.of(recipientCountry);
         return calculation(remittanceAmount, country);
     }
 
-    private double calculation(double remittanceAmount, RecipientCountry country) {
+    private double calculation(int remittanceAmount, RecipientCountry country) {
         double receiveAmount = 0.0;
         switch (country) {
             case KRW:
@@ -45,8 +45,8 @@ public class ExchangeRate {
         return receiveAmount;
     }
 
-    private void remittanceAmountValidation(double remittanceAmount) {
-        if (remittanceAmount < 0 || remittanceAmount > 10000) {
+    private void remittanceAmountValidation(int remittanceAmount) {
+        if (remittanceAmount <= 0 || remittanceAmount > 10000) {
             throw new InvalidRemittanceAmountException("입력한 송금액은 : " + remittanceAmount + " 입니다.");
         }
     }
