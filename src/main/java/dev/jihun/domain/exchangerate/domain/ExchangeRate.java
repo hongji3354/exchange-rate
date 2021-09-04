@@ -23,26 +23,27 @@ public class ExchangeRate {
         this.php = php;
     }
 
-    public double receiveAmountCalculation(int remittanceAmount, String recipientCountry) {
-        remittanceAmountValidation(remittanceAmount);
+    public double calculationBasedExchangeRate(String recipientCountry) {
         RecipientCountry country = RecipientCountry.of(recipientCountry);
-        return calculation(remittanceAmount, country);
-    }
-
-    private double calculation(int remittanceAmount, RecipientCountry country) {
-        double receiveAmount = 0.0;
         switch (country) {
             case KRW:
-                receiveAmount = krw * remittanceAmount;
-                break;
+                return krw;
             case JPY:
-                receiveAmount = jpy * remittanceAmount;
-                break;
+                return jpy;
             case PHP:
-                receiveAmount = php * remittanceAmount;
-                break;
+                return php;
         }
-        return receiveAmount;
+        return 0.0;
+    }
+
+    public double receiveAmountCalculation(int remittanceAmount, String recipientCountry) {
+        remittanceAmountValidation(remittanceAmount);
+        double exchangeRate = calculationBasedExchangeRate(recipientCountry);
+        return calculation(remittanceAmount, exchangeRate);
+    }
+
+    private double calculation(int remittanceAmount, double exchangeRate) {
+        return exchangeRate * remittanceAmount;
     }
 
     private void remittanceAmountValidation(int remittanceAmount) {
