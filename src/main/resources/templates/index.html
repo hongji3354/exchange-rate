@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>환율 계산</title>
+</head>
+
+<body>
+  <h1>환율 계산</h1>
+  <div>송금국가: 미국(USD)</div>
+  <div>
+    수취국가:
+    <select id="receipt-country">
+      <option value="krw">한국(KRW)</option>
+      <option value="jpy">일본(JPY)</option>
+      <option value="php">필리핀(PHP)</option>
+    </select>
+  </div>
+  <div>
+    환율: <span id="exchange-rate"></span>
+  </div>
+  <div>
+    송금액: <input type="text" id="remittance-amount"/> USD
+  </div>
+  <div>
+    <button id="calculation">submit</button>
+  </div>
+  <br/>
+  <div>
+    <span id="receipt-amount"></span>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script th:src="@{/index.js}"></script>
+
+</body>
+</html>
