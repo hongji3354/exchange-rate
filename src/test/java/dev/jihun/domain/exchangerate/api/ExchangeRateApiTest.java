@@ -35,9 +35,6 @@ class ExchangeRateApiTest {
     @MockBean
     private ExchangeRateApplication exchangeRateApplication;
 
-    @Mock
-    private dev.jihun.infra.exchangerate.ExchangeRateApi exchangeRateApi;
-
     @Autowired
     private ObjectMapper objectMapper;
 
