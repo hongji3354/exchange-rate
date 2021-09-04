@@ -7,5 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ReceivedAmountCalculationResponse {
 
+    private String exchangeRate;
     private String receivedAmount;
 }
