@@ -72,8 +72,9 @@ class ExchangeRateApiTest {
     void received_amount_calculation_test() throws Exception {
         //given
         ReceivedAmountCalculationRequest receivedAmountCalculationRequest = objectMapper.readValue("{ \"receiveCountry\" : \"KRW\", \"remittanceAmount\" :  1000}", ReceivedAmountCalculationRequest.class);
-        String result = NumberFormatUtil.format(receivedAmountCalculationRequest.getRemittanceAmount() * usaToKrw);
-        when(exchangeRateApplication.receivedAmountCalculation(any(ReceivedAmountCalculationRequest.class))).thenReturn(new ReceivedAmountCalculationResponse(result));
+        String exchangeRateResult = NumberFormatUtil.format(usaToKrw);
+        String receiveAmountResult = NumberFormatUtil.format(receivedAmountCalculationRequest.getRemittanceAmount() * usaToKrw);
+        when(exchangeRateApplication.receivedAmountCalculation(any(ReceivedAmountCalculationRequest.class))).thenReturn(new ReceivedAmountCalculationResponse(exchangeRateResult, receiveAmountResult));
 
         //when
         ResultActions response = mockMvc.perform(post("/receive-amount/calculation")
@@ -84,7 +85,8 @@ class ExchangeRateApiTest {
         //then
         response.andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.receivedAmount", is(result)));
+            .andExpect(jsonPath("$.exchangeRate", is(NumberFormatUtil.format(usaToKrw))))
+            .andExpect(jsonPath("$.receivedAmount", is(receiveAmountResult)));
     }
 
     @Test
