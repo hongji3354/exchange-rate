@@ -58,7 +58,7 @@ public class ExchangeRate {
 
         static RecipientCountry of(String recipientCountry) {
             return Arrays.stream(values())
-                        .filter(value -> recipientCountry.equals(value.name()))
+                        .filter(value -> recipientCountry.equalsIgnoreCase(value.name()))
                         .findFirst()
                         .orElseThrow(() -> new InvalidRecipientCountryException(recipientCountry + "는 지원하지 않는 수취국가 입니다."));
         }
