@@ -14,7 +14,7 @@ public class RestTemplateConfig {
 
     private final RestTemplateBuilder restTemplateBuilder;
 
-    @Bean
+    @Bean("currencylayer")
     public RestTemplate currencylayerExchangeRateTemplate() {
         return restTemplateBuilder.rootUri("http://apilayer.net")
             .requestFactory(() -> new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()))
