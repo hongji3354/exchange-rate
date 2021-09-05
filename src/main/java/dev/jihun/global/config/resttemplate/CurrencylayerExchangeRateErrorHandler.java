@@ -1,5 +1,7 @@
 package dev.jihun.global.config.resttemplate;
 
+import dev.jihun.global.error.ErrorCode;
+import dev.jihun.infra.exchangerate.CurrencylayerExchangeApiCallException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +25,6 @@ public class CurrencylayerExchangeRateErrorHandler implements ResponseErrorHandl
 
     @Override
     public void handleError(ClientHttpResponse response) throws IOException {
-        //TODO : 캐싱 데이터가 없다면 Exception 처리하기.
         String body = getBody(response);
 
         log.error("================");
@@ -31,6 +32,8 @@ public class CurrencylayerExchangeRateErrorHandler implements ResponseErrorHandl
         log.error("Response Status : {}", response.getRawStatusCode());
         log.error("Response body: {}", body);
         log.error("================");
+
+        throw new CurrencylayerExchangeApiCallException(ErrorCode.EXCHANGE_RATE_INFORMATION_INQUIRY_ERROR);
     }
 
     private String getBody(final ClientHttpResponse response) throws IOException {
