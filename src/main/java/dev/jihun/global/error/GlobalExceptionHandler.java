@@ -1,6 +1,8 @@
 package dev.jihun.global.error;
 
 import dev.jihun.global.error.exception.BusinessException;
+import dev.jihun.global.error.exception.ExternalApiCallException;
+import dev.jihun.infra.exchangerate.CurrencylayerExchangeApiCallException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +35,16 @@ public class GlobalExceptionHandler {
         log.error("handleHttpRequestMethodNotSupportedException", e);
         final ErrorResponse response = ErrorResponse.of(ErrorCode.NOT_ALLOWED_METHOD);
         return new ResponseEntity<>(response, HttpStatus.METHOD_NOT_ALLOWED);
+    }
+
+    /**
+     * 외부 API Call Fail시 발생
+     * */
+    @ExceptionHandler(ExternalApiCallException.class)
+    protected ResponseEntity<ErrorResponse> handleExternalApiCallException(ExternalApiCallException e) {
+        log.error("handleExternalApiCallException", e);
+        final ErrorResponse response = ErrorResponse.of(ErrorCode.EXTERNAL_API_CALL_EXCEPTION);
+        return new ResponseEntity<>(response, HttpStatus.valueOf(response.getStatus()));
     }
 
     /**
