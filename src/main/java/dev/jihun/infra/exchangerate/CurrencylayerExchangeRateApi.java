@@ -23,9 +23,9 @@ public class CurrencylayerExchangeRateApi implements ExchangeRateApi {
         Quotes quotes = currencylayerExchangeRateResponse.getQuotes();
 
         return ExchangeRate.builder()
-            .krw(quotes.USDKRW)
-            .jpy(quotes.USDJPY)
-            .php(quotes.USDPHP)
+            .krw(quotes.getUSDKRW())
+            .jpy(quotes.getUSDJPY())
+            .php(quotes.getUSDPHP())
             .build();
     }
 }
